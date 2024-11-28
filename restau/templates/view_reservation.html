@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la Réservation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Détails de la Réservation</h2>
+        <div class="card">
+            <div class="card-body">
+                <p><strong>ID:</strong> {{ reservation.id }}</p>
+                <p><strong>Prénom Client:</strong> {{ reservation.first_name }}</p>
+                <p><strong>Nom Client:</strong> {{ reservation.last_name }}</p>
+                <p><strong>Date de Réservation:</strong> {{ reservation.date }}</p>
+                <p><strong>Heure de Réservation:</strong> {{ reservation.time }}</p>
+                <p><strong>Nombre de Personnes:</strong> {{ reservation.number_of_people }}</p>
+                <p><strong>Table:</strong> {{ reservation.table }}</p>
+                <a href="{% url 'reservation_list' %}" class="btn btn-secondary">Retour à la Liste</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

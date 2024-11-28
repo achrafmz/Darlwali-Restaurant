@@ -1,0 +1,305 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="icon" href="{% static 'images/ico.jpg' %}">
+    <title>reservation</title>
+  <style>
+      #loading-spinner {
+            display: none; /* Masqué par défaut */
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Animation de rotation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Conteneur pour centrer le spinner */
+        .spinner-container {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8); /* Arrière-plan semi-transparent */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centre vertical et horizontal */
+            z-index: 9999; /* Toujours au-dessus des autres éléments */
+        }
+
+        /* Style pour le texte de chargement */
+        .loading-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+    input[type=text], select {
+  width: 150px;
+  padding: 12px 20px;
+    margin: 8px 0;
+   background-color: transparent;
+  display: inline-block;
+  border: 3px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=date], select {
+  width: 150px;
+  padding: 12px 20px;
+    margin: 8px 0;
+   background-color: transparent;
+  display: inline-block;
+  border: 3px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=time], select {
+  width: 150px;
+  padding: 12px 20px;
+    margin: 8px 0;
+   background-color: transparent;
+  display: inline-block;
+  border: 3px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=email], select {
+  width: 150px;
+  padding: 12px 20px;
+    margin: 8px 0;
+   background-color: transparent;
+  display: inline-block;
+  border: 3px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+  .button {
+    background-color: white; 
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .button1 {
+    background-color: white; 
+    color: rgb(3, 3, 3); 
+    border: 2px solid #dfdfdf;
+  }
+  
+  .button1:hover {
+    background-color: #000000;
+    color: rgb(243, 243, 243);
+    
+  }
+      
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial;
+    font-size: 17px;
+  }
+  
+  .container {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .container img {vertical-align: middle;}
+  
+  .container .content {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 1); /* Fallback color */
+    background: rgba(0, 0, 0,0.7); /* Black background with 0.5 opacity */
+    color: #f1f1f1;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
+  .span1{
+    border: 3px solid;
+    height: 40px;
+    width: 30px;
+  }
+  </style>
+  </head>
+  <body>
+  
+  
+  
+  <div class="container">
+    <img src="{{ restaurant.bgphoto.url }}" alt="Notebook" style="width:100%;">
+    <div class="content">
+      
+ <center><h1 style="font-size: 70px; text-decoration:  underline;">reserver votre table</h1></center><br><br>
+ <center>
+ <div>{% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+  </ul>
+{% endif %}
+<form action="" method="post" onsubmit="return validateForm()">
+  {% csrf_token %}
+  
+  <label for="id_first_name" style="color: #ccc;">Prénom</label>
+  <input type="text" id="id_first_name" name="first_name" placeholder="Prénom" style="color: #ccc;" >
+  
+  <label for="id_last_name" style="color: #ccc;">Nom</label>
+  <input type="text" id="id_last_name" name="last_name" placeholder="Nom" style="color: #ccc;">
+  
+  <label for="id_phone" style="color: #ccc;">Téléphone</label>
+  <input type="text" id="id_phone" name="phone" placeholder="Téléphone" style="color: #ccc;" >
+  
+  <label for="id_email" style="color: #ccc;">Email</label>
+  <input type="email" id="id_email" name="email" placeholder="Email" style="color: #ccc;" >
+  
+  <label for="id_date" style="color: #ccc;">Date</label>
+  <input type="date" id="id_date" name="date" style="color: #ccc;" >
+  
+  <label for="id_time" style="color: #ccc;">Heure</label>
+  <input type="time" id="id_time" name="time" style="color: #ccc;" >
+  
+  <label for="id_number_of_people" style="color: #ccc;">Nombre de personnes</label>
+  <select id="id_number_of_people" name="number_of_people" style="color: #ccc;">
+      {% for i in "12345678" %}
+          <option value="{{ i }}" {% if form.number_of_people.value == i %}selected{% endif %} style="color: #000;">{{ i }}</option>
+      {% endfor %}
+  </select>
+  
+  <br><br>
+  <span id="s2" style="color: red;"></span>
+  <br>
+  <button type="submit" class="button button1" onclick="showLoading()"><strong>Réserver</strong></button>
+</form>
+<div class="spinner-container" id="spinner-container">
+  <div id="loading-spinner"></div>
+  <div class="loading-text">Recherche de table...</div>
+</div>    <script>
+  // Fonction pour afficher le spinner
+  function showLoading() {
+      // Afficher l'indicateur de chargement
+      document.getElementById('spinner-container').style.display = 'flex';
+
+      // Simuler un délai pour illustrer l'action (par exemple 3 secondes)
+      setTimeout(function() {
+          // Masquer le spinner après 3 secondes
+          document.getElementById('spinner-container').style.display = 'none';
+      }, 3000);
+  }
+
+  // Assurer que le spinner est caché lors du chargement initial
+  window.onload = function() {
+      document.getElementById('spinner-container').style.display = 'none';
+  };
+</script>
+
+<script>
+function validateForm() {
+  let fields = ['first_name', 'last_name', 'phone', 'email', 'date', 'time', 'number_of_people'];
+  let valid = true;
+  let errorMsg = "Tous les champs doivent être remplis.";
+  
+  fields.forEach(function(field) {
+      let input = document.getElementById('id_' + field);
+      if (!input.value) {
+          valid = false;
+      }
+  });
+  
+  if (!valid) {
+      document.getElementById('s2').textContent = errorMsg;
+  }
+  
+  return valid;
+}
+</script>
+
+  </center>
+ 
+
+<script>
+      var users = [{ },
+             {  } ]
+  function add(){
+
+var userNom = document.getElementById('nom').value;
+var userPrenom = document.getElementById('prenom').value;
+var userPhone = document.getElementById('phone').value;
+var userMail = document.getElementById('email').value;
+var userPays = document.getElementById('pays').value;
+var userDate = document.getElementById('date').value;
+var userHeure = document.getElementById('time').value;
+
+
+if(userNom== '' || userPrenom == '' || userMail== ''|| userPays == '' ||userDate == ''|| userHeure == ''){
+    document.getElementById('s2').innerHTML = 'remplir All fields';
+    return false;
+}
+else if(userPrenom == ''){
+    document.getElementById('s2').innerHTML = 'remplir le  prenom';
+    return false;
+}
+else if(userPhone == ''){
+    document.getElementById('s2').innerHTML = 'remplir phone';
+    return false;
+}
+else if(userMail== ''){
+    document.getElementById('s2').innerHTML = 'remplir email';
+    return false;
+}
+else if(userPays == ''){
+    document.getElementById('s2').innerHTML = 'remplir pays';
+    return false;
+}
+else if(userDate == ''){
+    document.getElementById('s2').innerHTML = 'remplir date';
+    return false;
+}
+else if(userHeure == ''){
+    document.getElementById('s2').innerHTML = 'remplir heure';
+    return false;
+}
+else{
+  document.getElementById('s3').innerHTML = 'vous avez reserver';
+    var user ={};
+    user.nom = userNom;
+    user.prenom= userPrenom;
+    user.phone=userPhone;
+    user.mail=userMail;
+    user.pays=userPays;
+    user.date=userDate;
+    user.heure=userHeure;
+    users.push(user);
+    console.log(users)
+}
+}
+
+
+</script>
+
+ </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmation de Réservation</title>
+    <style>
+        /* Ajoutez ici le style pour l'e-mail */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff6600;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Confirmation de Réservation</h1>
+        <p>Bonjour {{ reservation.first_name }} {{ reservation.last_name }},</p>
+        <p>Merci pour votre réservation ! Nous avons bien enregistré votre demande.</p>
+        <p><strong>ID de réservation :</strong> {{ reservation.id }}</p>
+        <p><strong>Date :</strong> {{ reservation.date }}</p>
+        <p><strong>Heure :</strong> {{ reservation.time }}</p>
+        <p><strong>Nombre de personnes :</strong> {{ reservation.number_of_people }}</p>
+        <p><strong>Table :</strong> {{ reservation.table }}</p>
+        <p class="footer">Cordialement,<br>{{ restaurant.name }}</p>
+    </div>
+</body>
+</html>

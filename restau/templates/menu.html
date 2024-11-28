@@ -1,0 +1,456 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="icon" href="{% static 'images/ico.jpg' %}">
+
+        <link rel="stylesheet" href="{%static 'css/bootstrap.min.css' %}">    
+	<!-- Site CSS -->
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+<style> 
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.gallery-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.gallery-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.gallery-item {
+    flex: 0 0 33.33%; /* Trois images visibles à la fois */
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 24px;
+    border-radius: 50%;
+}
+
+.prev-button {
+    left: 10px;
+}
+
+.next-button {
+    right: 10px;
+}
+
+.title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2em;
+    color: #111;
+}
+.button {
+background-color: transparent; 
+border: none;
+color: white;
+padding: 16px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+.button1 {
+
+background-color: transparent; 
+color: rgb(255, 255, 255); 
+border: 2px solid #dfdfdf;
+}
+
+.button1:hover {
+background-color: #ffffff;
+color: rgb(0, 0, 0);
+}
+*{
+margin:0;
+padding:0;
+font-family:verdana;
+}
+
+nav{
+width: 100%;
+height: 100px;
+position: relative;
+line-height: 50px;
+background-color: transparent;
+}
+nav ul{
+float: right;
+margin-right: 30px;
+}
+nav ul li{
+list-style-type: none;
+display: inline-block;
+transition: 0.5s all;
+}
+nav ul li:hover{
+background-color:rgb(255, 255, 255);
+
+}
+nav ul li a{
+text-decoration:none;
+color: #fff;
+padding: 30px;
+}
+nav ul li a:hover{
+text-decoration: none;
+color: #0c0b0b;
+padding: 30px;
+
+}
+* {
+box-sizing: border-box;
+}
+
+body {
+font-family: Arial;
+font-size: 17px;
+}
+
+.containera{
+position: relative;
+max-width: 100%;
+margin: 0 auto;
+}
+
+.containera img {vertical-align: middle;}
+
+.containera .content {
+position: absolute;
+bottom: 0;
+background: rgb(0, 0, 0); /* Fallback color */
+background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+color: #f1f1f1;
+width: 100%;
+height: 100%;
+padding: 20px;
+}
+
+#footer {
+background: #292727;
+color: #fff;
+font-size: 14px;
+text-align: center;
+padding: 30px 0;
+}
+
+#footer h3 {
+font-size: 36px;
+font-weight: 700;
+color: #f0f0f0;
+position: relative;
+padding: 0;
+margin: 0 0 15px 0;
+}
+
+#footer p {
+font-size: 15;
+font-style: italic;
+padding: 0;
+margin: 0 0 40px 0;
+}
+
+
+.gg-phone {
+box-sizing: border-box;
+position: relative;
+display: block;
+width: 22px;
+height: 22px;
+transform: scale(var(--ggs,1))
+}
+.ggg-phone::after,
+.ggg-phone::before {
+content: "";
+display: block;
+box-sizing: border-box;
+position: absolute
+}
+.ggg-phone::after {
+width: 18px;
+height: 18px;
+border-top-left-radius: 1px;
+border-bottom-right-radius: 1px;
+border-bottom-left-radius: 12px;
+border-left: 4px solid;
+border-bottom: 4px solid;
+left: 2px;
+bottom: 2px;
+background:
+linear-gradient(
+ to left,
+ currentColor 10px,
+ transparent 0
+) no-repeat right 11px/6px 4px,
+linear-gradient(
+ to left,
+ currentColor 10px,
+ transparent 0
+) no-repeat -1px 0/4px 6px
+}
+.ggg-phone::before {
+width: 20px;
+height: 20px;
+border: 6px double;
+border-top-color: transparent;
+border-bottom-color: transparent;
+border-left-color: transparent;
+border-radius: 50%;
+transform: rotate(-45deg);
+bottom: 2px;
+left: 2px
+}
+input[type=text], select ,textarea{
+width: 180px;
+padding: 12px 20px;
+margin: 8px 0;
+color: #070707;
+background-color: transparent;
+display: inline-block;
+border: 3px solid #080808;
+border-radius: 4px;
+box-sizing: border-box;
+}
+
+input[type=date], select {
+width: 150px;
+padding: 12px 20px;
+margin: 8px 0;
+background-color: transparent;
+display: inline-block;
+border: 3px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+input[type=time], select {
+width: 150px;
+padding: 12px 20px;
+margin: 8px 0;
+background-color: transparent;
+display: inline-block;
+border: 3px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+input[type=email], select {
+width: 360px;
+padding: 12px 20px;
+margin: 8px 0;
+color: #050505;
+background-color: transparent;
+display: inline-block;
+border: 3px solid #0e0c0c;
+border-radius: 4px;
+box-sizing: border-box;
+}
+
+
+
+.button2 {
+background-color: rgb(7, 7, 7); 
+color: rgb(245, 239, 239); 
+border: 2px solid #0c0909;
+
+}
+
+.button2:hover {
+background-color: #0c0808;
+color: rgb(235, 225, 225);
+
+}
+
+
+
+.row{
+position:relative;
+width: 100%;
+display: flex;
+justify-content: space-between;
+
+}
+.row .col50{
+position: relative;
+width: 50%;
+justify-content: center;
+align-items: center;
+
+}
+
+.row .col50 img{
+height: 300px;
+width: 600px;
+position: relative;
+
+}
+img {vertical-align: middle;}
+
+hr {
+display: block;
+height: 1px;
+border: 0;
+border-top: 1px solid #ccc;
+margin: 1em 0;
+padding: 0;
+}
+.l{
+background-color: white; 
+border: none;
+color: rgb(10, 8, 8);
+padding: 16px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+transition-duration: 0.4s;
+cursor: pointer;
+}
+
+#myBtn {
+display: none; 
+position: fixed; 
+bottom: 20px; 
+right: 30px; 
+z-index: 99; 
+border: none; 
+outline: none; 
+background-color: rgb(3, 3, 3); 
+color: rgb(248, 239, 239); 
+cursor: pointer; 
+padding: 15px; 
+border-radius: 10px; 
+font-size: 18px; 
+}
+#myBtn :hover{
+display: none; 
+position: fixed; 
+right: 30px; 
+z-index: 99; 
+border: none; 
+outline: none; 
+background-color: rgb(3, 3, 3); 
+color: rgb(238, 231, 231); 
+cursor: pointer; 
+padding: 15px; 
+border-radius: 10px; 
+font-size: 18px; 
+}
+
+.span1{
+border: 3px solid;
+height: 40px;
+width: 30px;
+}</style>
+    </head>
+    <body>
+        <div class="containera">
+            <img src="{{ restaurant.bgphoto.url }}"  style="width:100% ;height: 70%;">
+            <div class="content">
+              <div>  <pre style="font-size: 20px; color: #f0f0f0;"><i class="ggg-phone">     {{ restaurant.phone }}</i></pre></div>
+              <hr/>
+              
+            <div id="abc">
+                      <nav><img src="{{ restaurant.logo.url }}" width="120px" height="130px"> 
+                          <ul>
+                            
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'home' %}">Contact us</a></li>
+                            <li><a href="{% url 'home' %}">galery</a></li>
+                            <li><a href="https://www.bing.com/maps?&mepi=24~~TopOfPage~LargeMapLink&ty=18&q=Marrakech%2C%20Marrakech-Safi%2C%20Maroc&satid=id.sid%3Aaf4d7390-63b3-ee05-e4e3-66fb4c52f8ec&vdpid=5684466510114848775&ppois=31.625825881958008_-7.989161014556885_Marrakech%2C%20Marrakech-Safi%2C%20Maroc_~&cp=31.625826~-7.989161&v=2&sV=1&FORM=MIRE&qpvt=lien+maps+marakech" target="_blank">Localisation</a></li>
+                            <li><a href="{% url 'reservation' %} "target="_blank">Reservation</a></li>
+                          </ul>
+                      </nav></div>
+                      <br><br><br><br>
+                      <center> 
+                          <h1 style="font-size: 40px; color: #f0f0f0;"> SPECIAL MENU</h1><br>
+                 
+                      <br><br><br>
+                      </center>
+                      <br><br><br>
+                  </div></div>
+
+                  <div class="menu-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="heading-title text-center">
+                                    <h2>Special Menu</h2>
+                                    <p>notre délicieuse menu est riche des differents plats soit traditionnelle ou d'autre</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="special-menu text-center">
+                                    <div class="button-group filter-button-group">
+                                        {% for category in categories %}
+                                            <button data-filter=".{{ category.name|lower }}">{{ category.name }}</button>
+                                        {% endfor %}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                            
+                        
+                        
+                        <div class="row special-list">
+                            {% for menu in menus %}
+                                <div class="col-lg-4 col-md-6 special-grid {{ menu.category.name|lower }}">
+                                    <div class="gallery-single fix">
+                                        <img src="{{ menu.photo.url }}" class="img-fluid" alt="Image">
+                                        <div class="why-text">
+                                            <h4>{{ menu.name }}</h4>
+                                            <p>{{ menu.description }}</p>
+                                            <h5>${{ menu.price }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        
+                <script src="{%static 'js/jquery-3.2.1.min.js' %}"></script>
+    <!-- ALL PLUGINS -->
+	<script src="{%static 'js/jquery.superslides.min.js' %}"></script>
+	<script src="{%static 'js/images-loded.min.js' %}"></script>
+	<script src="{%static 'js/isotope.min.js' %}"></script>
+    <script src="{%static 'js/custom.js' %}"></script>
+    
+
+
+   
+    </body>
+</html>

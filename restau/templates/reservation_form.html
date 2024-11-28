@@ -1,0 +1,42 @@
+<!-- reservation_form.html -->
+{% if form.non_field_errors %}
+    <div class="alert alert-danger">
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    
+    <label for="id_first_name" style="color: #ccc;">Prénom</label>
+    <input type="text" id="id_first_name" name="first_name" placeholder="Prénom" style="color: #ccc;" value="{{ form.first_name.value }}">
+    
+    <label for="id_last_name" style="color: #ccc;">Nom</label>
+    <input type="text" id="id_last_name" name="last_name" placeholder="Nom" style="color: #ccc;" value="{{ form.last_name.value }}">
+    
+    <label for="id_phone" style="color: #ccc;">Téléphone</label>
+    <input type="text" id="id_phone" name="phone" placeholder="Téléphone" style="color: #ccc;" value="{{ form.phone.value }}">
+    
+    <label for="id_email" style="color: #ccc;">Email</label>
+    <input type="email" id="id_email" name="email" placeholder="Email" style="color: #ccc;" value="{{ form.email.value }}">
+    
+    <label for="id_date" style="color: #ccc;">Date</label>
+    <input type="date" id="id_date" name="date" style="color: #ccc;" value="{{ form.date.value|date:'Y-m-d' }}">
+    
+    <label for="id_time" style="color: #ccc;">Heure</label>
+    <input type="time" id="id_time" name="time" style="color: #ccc;" value="{{ form.time.value|date:'H:i' }}">
+    
+    <label for="id_number_of_people" style="color: #ccc;">Nombre de personnes</label>
+    <select id="id_number_of_people" name="number_of_people" style="color: #ccc;">
+        {% for i in "12345678" %}
+            <option value="{{ i }}" {% if form.number_of_people.value == i %}selected{% endif %} style="color: #000;">{{ i }}</option>
+        {% endfor %}
+    </select>
+    
+    <br><br>
+    <span id="s2" style="color: red;"></span>
+    <br>
+    <button type="submit" class="button button1"><strong>Réserver</strong></button>
+</form>

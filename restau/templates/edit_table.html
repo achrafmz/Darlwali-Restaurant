@@ -1,0 +1,6 @@
+<h2>Modifier la table {{ form.instance.number }}</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sauvegarder</button>
+</form>

@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter une Photo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Couleur de fond légère */
+        }
+        .container {
+            background-color: #ffffff; /* Couleur de fond du conteneur */
+            border-radius: 8px; /* Bords arrondis */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
+            padding: 20px;
+        }
+        h2 {
+            color: #007bff; /* Couleur du titre */
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold; /* Gras pour les labels */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Couleur personnalisée pour le bouton */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Couleur au survol */
+            border-color: #004085;
+        }
+        .form-control {
+            border-radius: 4px; /* Bords arrondis pour les champs */
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Ajouter une Photo</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

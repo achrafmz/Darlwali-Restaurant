@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Réservation Réussie</title>
+
+
+    <style>
+        #loading-spinner {
+            display: none; /* Masqué par défaut */
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(0, 0, 0, 0.1);
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Animation de rotation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Conteneur pour centrer le spinner */
+        .spinner-container {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8); /* Arrière-plan semi-transparent */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centre vertical et horizontal */
+            z-index: 9999; /* Toujours au-dessus des autres éléments */
+        }
+
+        /* Style pour le texte de chargement */
+        .loading-text {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #ff6600; /* Couleur orange */
+            color: #fff;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            text-align: center;
+        }
+        header img {
+            width: 100px; /* Ajustez selon la taille de votre logo */
+            vertical-align: middle;
+        }
+        header h1 {
+            margin: 0;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 80px; /* Pour éviter que le contenu ne soit caché par l'en-tête fixe */
+            padding: 20px;
+        }
+        h2 {
+            color: #ff6600;
+        }
+        .details {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            text-align: left;
+        }
+        .details p {
+            margin: 10px 0;
+        }
+        .details p strong {
+            color: #ff6600;
+        }
+        .buttons {
+            margin: 20px;
+        }
+        .buttons a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        .download-btn {
+            background-color: #ff6600; /* Couleur orange */
+        }
+        .back-btn {
+            background-color: #007bff; /* Couleur bleue */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #ff6600; /* Couleur orange */
+            color: #fff;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            text-align: center;
+        }
+        header img {
+            width: 100px; /* Ajustez selon la taille de votre logo */
+            vertical-align: middle;
+        }
+        header h1 {
+            margin: 0;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 80px; /* Pour éviter que le contenu ne soit caché par l'en-tête fixe */
+            padding: 20px;
+        }
+        h2 {
+            color: #ff6600;
+        }
+        .details {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 600px;
+            text-align: left;
+        }
+        .details p {
+            margin: 10px 0;
+        }
+        .details p strong {
+            color: #ff6600;
+        }
+        .download-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #ff6600;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .download-button:hover {
+            background-color: #e65c00;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ restaurant.logo.url }}" alt="Logo du Restaurant"> <!-- Remplacez par le chemin vers votre logo -->
+        <h1>{{ restaurant.name }}</h1> <!-- Remplacez par le nom de votre restaurant -->
+    </header>
+
+    <div class="container">
+        <h1>Réservation Réussie</h1>
+        <p>Merci pour votre réservation ! Nous avons bien enregistré votre demande.</p>
+
+        <div class="details">
+            <h2>Détails de votre réservation :</h2>
+            <p><strong>ID de réservation :</strong> {{ reservation.id }}</p>
+            <p><strong>Prénom :</strong> {{ reservation.first_name }}</p>
+            <p><strong>Nom :</strong> {{ reservation.last_name }}</p>
+            <p><strong>Téléphone :</strong> {{ reservation.phone }}</p>
+            <p><strong>Email :</strong> {{ reservation.email }}</p>
+            <p><strong>Date :</strong> {{ reservation.date }}</p>
+            <p><strong>Heure :</strong> {{ reservation.time }}</p>
+            <p><strong>Nombre de personnes :</strong> {{ reservation.number_of_people }}</p>
+            <p><strong>Table :</strong> {{ reservation.table }}</p>
+        </div>
+
+        <!-- Bouton de téléchargement -->
+        <div class="buttons">
+            <a href="/download_reservation/{{ reservation.id }}/" onclick="showLoading()" class="download-button">Télécharger les détails</a>
+            <a href="{% url 'home' %}" class="back-btn">Retour à l'accueil</a>
+        </div>
+    </div>
+    <div class="spinner-container" id="spinner-container">
+        <div id="loading-spinner"></div>
+        <div class="loading-text">Telechargement de recu...</div>
+      </div>    <script>
+        // Fonction pour afficher le spinner
+        function showLoading() {
+            // Afficher l'indicateur de chargement
+            document.getElementById('spinner-container').style.display = 'flex';
+      
+            // Simuler un délai pour illustrer l'action (par exemple 3 secondes)
+            setTimeout(function() {
+                // Masquer le spinner après 3 secondes
+                document.getElementById('spinner-container').style.display = 'none';
+                 // Simuler une fin de traitement
+            }, 3000);
+        }
+      
+        // Assurer que le spinner est caché lors du chargement initial
+        window.onload = function() {
+            document.getElementById('spinner-container').style.display = 'none';
+        };
+      </script>
+</body>
+</html>

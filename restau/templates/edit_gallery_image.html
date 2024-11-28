@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier une Photo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Couleur de fond légère */
+        }
+        .container {
+            background-color: #ffffff; /* Couleur de fond du conteneur */
+            border-radius: 8px; /* Bords arrondis */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
+            padding: 20px;
+        }
+        h2 {
+            color: #007bff; /* Couleur du titre */
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold; /* Gras pour les labels */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Couleur personnalisée pour le bouton */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Couleur au survol */
+            border-color: #004085;
+        }
+        .form-control {
+            border-radius: 4px; /* Bords arrondis pour les champs */
+        }
+        /* Container styling */
+        .container {
+            max-width: 600px;
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Title styling */
+        h2 {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* Form elements */
+        form {
+            margin-top: 20px;
+        }
+        
+        form .form-group {
+            margin-bottom: 15px;
+        }
+        
+        form .form-control {
+            border-radius: 5px;
+            box-shadow: none;
+            border: 1px solid #ced4da;
+        }
+        
+        form .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+        
+        form .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Input fields */
+        input[type="file"] {
+            padding: 5px;
+        }
+        
+        input[type="text"], input[type="number"], textarea, select {
+            padding: 10px;
+            font-size: 14px;
+        }
+        
+        /* Error messages */
+        .errorlist {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 576px) {
+            .container {
+                padding: 20px;
+            }
+        
+            h2 {
+                font-size: 24px;
+            }
+        }
+        input[type="text"], input[type="number"], textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Input focus state */
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Placeholder styling */
+input::placeholder, textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* Animated underline effect */
+input[type="text"], input[type="number"], textarea, select {
+    position: relative;
+    overflow: hidden;
+}
+
+input[type="text"]::before, input[type="number"]::before, textarea::before, select::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #007bff;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:focus::before, input[type="number"]:focus::before, textarea:focus::before, select:focus::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+/* Hover effect for inputs */
+input[type="text"]:hover, input[type="number"]:hover, textarea:hover, select:hover {
+    border-color: #007bff;
+    background-color: #ffffff;
+}
+
+/* File input styling */
+input[type="file"] {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+    background-color: #0056b3;
+}
+
+input[type="file"]::file-selector-button {
+    display: none;
+}
+        </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Modifier la Photo de {{ image.restaurant.name }}</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Enregistrer les Modifications</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

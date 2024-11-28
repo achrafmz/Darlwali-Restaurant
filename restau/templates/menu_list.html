@@ -1,0 +1,303 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Menu gestion</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="{%static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <!--*******************
+        Preloader end
+    ********************-->
+
+    
+    <!--**********************************
+        Main wrapper start
+    ***********************************-->
+    <div id="main-wrapper">
+
+        <!--**********************************
+            Nav header start
+        ***********************************-->
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="{%static 'images/logo.png' %}" alt=""> </b>
+                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="images/logo-text.png" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
+            Nav header end
+        ***********************************-->
+
+        <!--**********************************
+            Header start
+        ***********************************-->
+        <div class="header">    
+            <div class="header-content clearfix">
+                
+                <div class="nav-control">
+                    <div class="hamburger">
+                        <span class="toggle-icon"><i class="icon-menu"></i></span>
+                    </div>
+                </div>
+                <div class="header-left">
+                    <div class="input-group icons">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                        </div>
+                        <div class="drop-down animated flipInX d-md-none">
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <ul class="clearfix">
+                       
+                        <li class="icons dropdown">
+                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                                <span class="activity active"></span>
+                                <img src="data:image/jpeg;base64,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" height="40" width="40" alt="">
+                            </div>
+                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'profile' %}"><i class="icon-user"></i> <span>Profile</span></a>
+                                        </li>
+                                       
+                                        
+                                        <hr class="my-2">
+                                      
+                                        <li>
+                                            <form method="POST" action="{% url 'logout' %}">
+                                                {% csrf_token %}
+                                                <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">
+                                                    <i class="icon-key"></i> <span>Logout</span>
+                                                </button>
+                                            </form>
+                                        </li>                                       </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+        <!--**********************************
+            Sidebar start
+        ***********************************-->
+        ***********************************-->
+        <div class="nk-sidebar">           
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Dashboard</li>
+                    <li>
+                        <a class="has-arrow" href="{% url 'dashboard' %}" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        </a>
+                       
+                    </li>
+                    
+                    <li class="nav-label"></li>
+                    <li>
+                        <a href="#" class="has-arrow" onclick="toggleSubMenu(event, 'menu-management-submenu')">
+                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Menu Management</span>
+                        </a>
+                        <ul id="menu-management-submenu" class="nav-submenu" style="display: none;">
+                            <li><a href="{% url 'menu_list' %}">Menu</a></li>
+                            <li><a href="{% url 'category_list' %}">Catégories</a></li>
+                        </ul>
+                    </li>
+                    
+                    <script>
+                    function toggleSubMenu(event, id) {
+                        event.preventDefault(); // Empêche l'action par défaut du lien
+                        var submenu = document.getElementById(id);
+                        if (submenu.style.display === "none" || submenu.style.display === "") {
+                            submenu.style.display = "block";
+                        } else {
+                            submenu.style.display = "none";
+                        }
+                    }
+                    </script>
+                    
+                    <li>
+                        <a href="{%url 'reservation_list' %}" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Reservations List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{%url 'gallery_list' %}" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Gallery management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{%url 'update_restaurant' %}" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Retaurant Infos</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{%url 'contact_list' %}" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Messages</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--**********************************
+            Sidebar end
+        ***********************************-->
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <nav id="sidebar" class="col-md-2 bg-light">
+                    <div class="sidebar-header">
+                        <h4>Menu Admin</h4>
+                    </div>
+                    <ul class="list-unstyled components">
+                        <li>
+                            <a href="{% url 'category_list' %}">Gérer Catégories</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'menu_list' %}">Gérer Menu</a>
+                        </li>
+                        <!-- Ajoutez d'autres éléments de menu ici -->
+                    </ul>
+                </nav>
+    
+                <!-- Page Content -->
+                <main role="main" class="col-md-10 ml-sm-auto px-4">
+                    <div class="container my-5">
+                        <h2 class="text-center mb-4">Gestion du Menu</h2>
+                
+                        <!-- Formulaire de filtre par catégorie -->
+                        <form method="GET" class="form-inline mb-3">
+                            <label for="category" class="mr-2">Filtrer par catégorie :</label>
+                            <select name="category" id="category" class="form-control mr-2">
+                                <option value="">Toutes les catégories</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-primary">Filtrer</button>
+                        </form>
+                
+                        <a href="{% url 'add_menu_item' %}" class="btn btn-primary mb-3">Ajouter un Élément</a>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Description</th>
+                                        <th>Prix</th>
+                                        <th>Catégorie</th>
+                                        <th>Photo</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in menu_items %}
+                                        <tr>
+                                            <td>{{ item.name }}</td>
+                                            <td>{{ item.description }}</td>
+                                            <td>{{ item.price }} €</td>
+                                            <td>{{ item.category.name }}</td>
+                                            <td>
+                                                {% if item.photo %}
+                                                    <img src="{{ item.photo.url }}" alt="{{ item.name }}" style="max-width: 100px;">
+                                                {% else %}
+                                                    Pas de photo
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'edit_menu_item' item.pk %}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                                <a href="{% url 'delete_menu_item' item.pk %}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="6" class="text-center">Aucun élément trouvé</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+                
+            </div>
+        </div>
+    
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="{%static 'plugins/common/common.min.js' %}"></script>
+    <script src="{%static 'js/custom.min.js' %}"></script>
+    <script src="{%static 'js/settings.js' %}"></script>
+    <script src="{%static 'js/gleek.js' %}"></script>
+    <script src="{%static 'js/styleSwitcher.js' %}"></script>
+
+</body>
+
+</html>

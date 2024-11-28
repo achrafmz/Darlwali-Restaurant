@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Confirmation de Réservation</h1>
+  
+  <p>Veuillez confirmer les détails de votre réservation :</p>
+  <ul>
+    <li>Prénom : {{ reservation_data.firstname }}</li>
+    <li>Nom : {{ reservation_data.lastname }}</li>
+    <li>Téléphone : {{ reservation_data.phone }}</li>
+    <li>Email : {{ reservation_data.email }}</li>
+    <li>Pays : {{ reservation_data.country }}</li>
+    <li>Nombre de personnes : {{ reservation_data.personne }}</li>
+    <li>Date : {{ reservation_data.date }}</li>
+    <li>Heure : {{ reservation_data.time }}</li>
+  </ul>
+  
+  <form method="post" action="{% url 'confirm_reservation' %}">
+    {% csrf_token %}
+    <button type="submit">Confirmer la Réservation</button>
+  </form>
+{% endblock %}

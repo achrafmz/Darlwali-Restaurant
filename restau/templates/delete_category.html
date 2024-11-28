@@ -1,0 +1,38 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supprimer une Catégorie</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Restaurant</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'category_list' %}">Catégories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'menu_list' %}">Menu</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Supprimer une Catégorie</h2>
+        <form method="post" class="bg-light p-4 rounded shadow">
+            {% csrf_token %}
+            <p class="mb-3">Êtes-vous sûr de vouloir supprimer la catégorie "{{ category.name }}" ?</p>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+            <a href="{% url 'category_list' %}" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

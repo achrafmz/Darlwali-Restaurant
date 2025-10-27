@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Restaurant, RestaurantGallery, Menu, Reservation, Contact, Table, Reservation,Category
+from .models import Restaurant, RestaurantGallery, Menu, Reservation, Contact, Table, Category
 
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
@@ -11,8 +11,8 @@ class RestaurantGalleryAdmin(admin.ModelAdmin):
     list_display = ('image', 'description')
     search_fields = ('description',)
 
-admin.site.register(Category)
-class CatogoryAdmin(admin.ModelAdmin):
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 @admin.register(Menu)
@@ -21,26 +21,21 @@ class MenuAdmin(admin.ModelAdmin):
     search_fields = ('name', 'category')
     list_filter = ('category',)
 
-
-
-
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('firstname', 'lastname', 'email', 'message','date_posted')
     search_fields = ('lastname', 'email')
 
+@admin.register(Table)
 class TableAdmin(admin.ModelAdmin):
     list_display = ('number', 'seats')
     search_fields = ('number',)
     list_filter = ('seats',)
 
-admin.site.register(Table, TableAdmin)
-
+@admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ( 'table', 'date', 'time', 'number_of_people')
-    search_fields = ( 'first_name', 'last_name', 'phone', 'email')
+    list_display = ('table', 'date', 'time', 'number_of_people')
+    search_fields = ('first_name', 'last_name', 'phone', 'email')
     list_filter = ('date', 'time', 'table')
     ordering = ('-date', '-time')
-    readonly_fields = ( 'table', 'date', 'time', 'number_of_people')
-
-admin.site.register(Reservation, ReservationAdmin)
+    readonly_fields = ('table', 'date', 'time', 'number_of_people')

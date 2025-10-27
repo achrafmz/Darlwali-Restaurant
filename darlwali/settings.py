@@ -50,8 +50,8 @@ INSTALLED_APPS = [
 ]
 LOGOUT_REDIRECT_URL = '/adminlogin/'  # Remplace par l'URL correcte de ta page de connexion
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',  # Middleware de session
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,11 +85,14 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', 'votre_cle_api_openai')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://darlwali_db_user:dZpFsiz5ZhmQz2Jbbtde2NWoFYKvqM9T@dpg-d3vdcgili9vc73co2lt0-a.oregon-postgres.render.com/darlwali_db',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
+
+
 
 # --- Ajoute ce bloc juste en dessous ---
 if 'DATABASE_URL' in os.environ:

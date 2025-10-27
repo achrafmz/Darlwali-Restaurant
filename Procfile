@@ -1,1 +1,1 @@
-web: gunicorn darlwali.wsgi
+web: gunicorn darlwali.wsgi --log-file -
